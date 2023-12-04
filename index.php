@@ -32,16 +32,18 @@ if (isset($_POST['submit'])) {
             <form class="search" action="index.php" method="POST">
                 <input class="search-box" type="text" name="city" placeholder="search by city name......">
                 <input class="btn" type="submit" name="submit" value="Search"><br>
-                
+
             </form>
         </div>
         <?php
         if (isset($city)) {
             echo ' <h2>Weather for the ' . $city . ' city</h2>';
+            $todays_temp = $climate->list[0]->main->temp;
+            echo ' <span id="temp">' . $todays_temp . ' °C</span>';
         }
         ?>
 
-    
+
         <?php
 
 
@@ -53,15 +55,19 @@ if (isset($_POST['submit'])) {
                 $icon = $climate->list[$i]->weather[0]->icon;
                 $des = $climate->list[$i]->weather[0]->description;
                 $temp = $climate->list[$i]->main->temp;
+                $tempmin = $climate->list[$i]->main->temp_min;
+                $tempmax = $climate->list[$i]->main->temp_max;
                 $feels = $climate->list[$i]->main->feels_like;
                 $date = $climate->list[$i]->dt_txt;
 
                 $time = substr($date, -8);
                 echo '<img src="https://openweathermap.org/img/wn/' . $icon . '@2x.png" alt="">';
                 echo ' <h4>' . $des . '</h4>';
-                echo ' <h6>Temp :' . $temp . '</h6>';
-                echo ' <h5>Feels Like :' . $feels . '</h5>';
-                echo ' <h5>Time :' . $time . '</h5>';
+                echo ' <h6>Temp: ' . $temp . '</h6>';
+                echo ' <h5>Minimum Temp: ' . $tempmin . '</h5>';
+                echo ' <h5>Maximum Temp: ' . $tempmax . '</h5>';
+                echo ' <h5>Feels Like: ' . $feels . '</h5>';
+                echo ' <h5>Time: ' . $time . '</h5>';
                 echo '</div>';
             }
         }
@@ -84,9 +90,9 @@ if (isset($_POST['submit'])) {
                 $day = substr($date, 0, 10);
                 echo '<img src="https://openweathermap.org/img/wn/' . $icon . '@2x.png" alt="">';
                 echo ' <h4>' . $des . '</h4>';
-                echo ' <h6>Temp :' . $temp . '</h6>';
-                echo ' <h5>Feels Like :' . $feels . '</h5>';
-                echo ' <h5>Date : ' . $day . '</h5>';
+                echo ' <h6>Temp: ' . $temp . '</h6>';
+                echo ' <h5>Feels Like: ' . $feels . '</h5>';
+                echo ' <h5>Date: ' . $day . '</h5>';
                 echo '</div>';
             }
         }
@@ -95,7 +101,7 @@ if (isset($_POST['submit'])) {
 
 
 
-        </div>
+
 
 
     </main>
