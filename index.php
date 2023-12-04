@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
         </div>
         <?php
         if (isset($city)) {
-            echo ' <h2>Weather for the ' . $city . ' city</h2>';
+            echo ' <h1>Weather for the ' . $city . ' city</h1>';
             $todays_temp = $climate->list[0]->main->temp;
             echo ' <span id="temp">' . $todays_temp . ' °C</span>';
         }
